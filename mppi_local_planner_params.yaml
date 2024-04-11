@@ -1,0 +1,132 @@
+MPPILocalPlannerROS:
+
+    odom_topic: "odom"
+    map_frame: "odom"
+
+    # Controller
+    controller_frequency: 10.0
+    time_steps: 32
+    model_dt: 0.1
+    batch_size: 1800
+    vx_std: 0.2
+    vy_std: 0.0
+    wz_std: 0.4
+    vx_max: 0.6
+    vx_min: -0.11
+    vy_max: 0.0
+    wz_max: 1.0
+    iteration_count: 1
+    temperature: 0.3
+    gamma: 0.015
+    motion_model: "DiffDrive"
+    visualize: true
+    shift_control_sequence: false
+    retry_attempt_limit: 3
+    look_ahead: 10
+    curvature_estimate_point: 6
+
+    # Path Handler
+    max_robot_pose_search_dist: 1.5
+    prune_distance: 1.7
+    transform_tolerance: 0.1
+    enforce_path_inversion: false
+    inversion_xy_tolerance: 0.2
+    inversion_yaw_tolerance: 0.4
+    inversion_locale: 0
+
+    # Noise Generator
+    regenerate: true
+
+    # Trajectory Visualizer
+    tv_time_step: 3
+    tv_trajectory_step: 5
+
+
+    # Ackermann Constraints
+    ac_min_turning_r: 0.25
+
+    # Constraint Critic
+    constraint_enabled: true
+    constraint_cost_power: 1
+    constraint_cost_weight: 4.0
+    constraint_vx_acc_max: 0.6
+    constraint_wz_acc_max: 0.8
+
+    # Goal Critic
+    goal_enabled: true
+    goal_cost_power: 1.0
+    goal_cost_weight: 10.0
+    goal_threshold_to_consider: 1.0
+
+    # Goal Angle Critic
+    goal_angle_enabled: true
+    goal_angle_cost_power: 1.0
+    goal_angle_cost_weight: 5.0
+    goal_angle_threshold_to_consider: 1.0
+
+    # Prefer Forward Critic
+    preforward_enabled: true
+    preforward_cost_power: 1.0
+    preforward_cost_weight: 20.0
+    preforward_threshold_to_consider: 0.3
+
+    # Obstacles Critic (not in use)
+    obstacle_enabled: true
+    obstacle_cost_power: 1.0
+    obstacle_collision_cost: 10000.0
+    obstacle_critical_weight: 20.0
+    obstacle_repulsion_weight: 1.5
+    obstacle_consider_footprint: false
+    obstacle_near_goal_distance: 0.5
+    obstacle_collision_margin_distance: 0.1
+
+    # Cost Critic (Obstacle Avoidance)
+    cost_enabled: true
+    cost_cost_power: 1.0
+    cost_cost_weight: 10.0
+    cost_critical_cost: 300
+    cost_collision_cost: 1000000
+    cost_consider_footprint: true
+    cost_near_goal_distance: 0.5
+
+    # Path Align Critic
+    path_align_enabled: true
+    path_align_cost_power: 1.0
+    path_align_cost_weight: 30.0 #30.0
+    path_align_offset_from_furthest: 0
+    path_align_threshold_to_consider: 0.1
+    path_align_trajectory_point_step: 4      # for path intergral mode
+    path_align_use_path_orientations: true
+    path_align_orientation_weight: 0.05      # coefficient before orientation error
+    path_align_max_path_occupancy_ratio: 0.3 # occupancy_ratio = invaliad_num / total_num
+
+    # Path Follow Critic
+    path_follow_enabled: true
+    path_follow_cost_power: 1.0
+    path_follow_cost_weight: 10.0 #5.0
+    path_follow_offset_from_furthest: 6
+    path_follow_threshold_to_consider: 0.1
+
+    # Path Angle Critic
+    path_angle_enabled: true
+    path_angle_cost_power: 1.0
+    path_angle_cost_weight: 10.0
+    # mode 0 FORWARD_PREFERENCE
+    # mode 1 NO_DIRECTIONAL_PREFERENCE
+    # mode 2 CONSIDER_FEASIBLE_PATH_ORIENTATIONS
+    path_angle_mode: 0
+    path_angle_offset_from_furthest: 4
+    path_angle_max_angle_to_furthest: 0.785398
+    path_angle_threshold_to_consider: 0.1
+
+    # Twirling Critic
+    twirling_enabled: true
+    twirling_cost_power: 1.0
+    twirling_cost_weight: 5.0
+
+    # Velocity Critic
+    velocity_enabled: true
+    velocity_cost_power: 1.0
+    velocity_cost_weight: 0.05
+    velocity_threshold_to_consider: 0.1
+    velocity_max_vel_x: 0.6
