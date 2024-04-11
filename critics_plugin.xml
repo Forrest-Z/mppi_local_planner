@@ -1,0 +1,44 @@
+<library path="lib/libmppi_critics">
+
+  <class name="mppi/critics/CostCritic" type="mppi::critics::CostCritic" base_class_type="mppi::critics::CriticFunction">
+    <description>mppi critic for obstacle avoidance using costmap score</description>
+  </class>
+
+  <class name="mppi/critics/GoalCritic" type="mppi::critics::GoalCritic" base_class_type="mppi::critics::CriticFunction">
+    <description>mppi critic for driving towards the goal</description>
+  </class>
+
+  <class name="mppi/critics/GoalAngleCritic" type="mppi::critics::GoalAngleCritic" base_class_type="mppi::critics::CriticFunction">
+    <description>mppi critic for achieving the goal heading angle</description>
+  </class>
+
+
+  <class name="mppi/critics/PathAlignLegacyCritic" type="mppi::critics::PathAlignLegacyCritic" base_class_type="mppi::critics::CriticFunction">
+    <description>mppi critic for aligning to path (legacy)</description>
+  </class>
+
+  <class name="mppi/critics/PathAngleCritic" type="mppi::critics::PathAngleCritic" base_class_type="mppi::critics::CriticFunction">
+    <description>mppi critic for tracking the path in the correct heading</description>
+  </class>
+
+  <class name="mppi/critics/PathFollowCritic" type="mppi::critics::PathFollowCritic" base_class_type="mppi::critics::CriticFunction">
+    <description>mppi critic for driving towards the goal that is furthest among trajectories nearest path points</description>
+  </class>
+
+  <class name="mppi/critics/PreferForwardCritic" type="mppi::critics::PreferForwardCritic" base_class_type="mppi::critics::CriticFunction">
+    <description>mppi critic for driving forward</description>
+  </class>
+
+  <class name="mppi/critics/TwirlingCritic" type="mppi::critics::TwirlingCritic" base_class_type="mppi::critics::CriticFunction">
+    <description>mppi critic for preventing twirling behavior when using omnidirectional models</description>
+  </class>
+
+  <class name="mppi/critics/ConstraintCritic" type="mppi::critics::ConstraintCritic" base_class_type="mppi::critics::CriticFunction">
+    <description>mppi critic for incentivizing moving within kinematic and dynamic bounds</description>
+  </class>
+
+  <class name="mppi/critics/VelocityCritic" type="mppi::critics::VelocityCritic" base_class_type="mppi::critics::CriticFunction">
+    <description>mppi critic for improving velocity</description>
+  </class>
+
+</library>
