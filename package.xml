@@ -68,10 +68,8 @@
    <depend>tf2_eigen</depend>
    <depend>tf2_ros</depend>
    <depend>std_msgs</depend>
-   <depend>xtensor</depend>
    <depend>libomp-dev</depend>
    <depend>benchmark</depend>
-   <depend>xsimd</depend>
 
    <build_depend>dynamic_reconfigure</build_depend>
    <exec_depend>dynamic_reconfigure</exec_depend>

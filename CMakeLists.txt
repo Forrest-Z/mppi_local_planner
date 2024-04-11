@@ -4,16 +4,6 @@ project(mppi_local_planner)
 # Set to Release in order to speed up the program significantly
 set(CMAKE_BUILD_TYPE Release) #None, Debug, Release, RelWithDebInfo, MinSizeRel
 
-add_definitions(-DXTENSOR_ENABLE_XSIMD)
-add_definitions(-DXTENSOR_USE_XSIMD)
-
-set(XTENSOR_USE_TBB 0)
-set(XTENSOR_USE_OPENMP 0)
-set(XTENSOR_USE_XSIMD 1)
-
-#find_package(xtensor REQUIRED)
-#find_package(xsimd REQUIRED)
-
 find_package(catkin REQUIRED COMPONENTS
   base_local_planner
   costmap_2d
@@ -50,31 +40,8 @@ set(EXTERNAL_INCLUDE_DIRS ${Eigen_INCLUDE_DIRS})
 
 include_directories(
   include
-  third_party
 )
 
-include(CheckCXXCompilerFlag)
-
-check_cxx_compiler_flag("-mno-avx512f" COMPILER_SUPPORTS_AVX512)
-check_cxx_compiler_flag("-msse4.2" COMPILER_SUPPORTS_SSE4)
-check_cxx_compiler_flag("-mavx2" COMPILER_SUPPORTS_AVX2)
-check_cxx_compiler_flag("-mfma" COMPILER_SUPPORTS_FMA)
-
-if(COMPILER_SUPPORTS_AVX512)
-  add_compile_options(-mno-avx512f)
-endif()
-
-if(COMPILER_SUPPORTS_SSE4)
-  add_compile_options(-msse4.2)
-endif()
-
-if(COMPILER_SUPPORTS_AVX2)
-  add_compile_options(-mavx2)
-endif()
-
-if(COMPILER_SUPPORTS_FMA)
-  add_compile_options(-mfma)
-endif()
 
 # If building one the same hardware to be deployed on, try `-march=native`!
 add_compile_options(-O3 -finline-limit=10000000 -ffp-contract=fast -ffast-math -mtune=generic)
@@ -85,7 +52,6 @@ add_compile_options(-std=c++17)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-
 
 
 
@@ -203,9 +169,6 @@ catkin_package(
         tf2_eigen
         visualization_msgs
         dynamic_reconfigure
- # DEPENDS
-       # xtensor
-       # xsimd
 )
 
 ###########
@@ -216,7 +179,6 @@ catkin_package(
 ## Your package locations should be listed before other locations
 include_directories(
  include
- third_party
 )
 include_directories(
   SYSTEM
@@ -236,11 +198,9 @@ add_library(mppi_local_planner SHARED
 )
 
 add_library(mppi_critics SHARED
-  #src/critics/obstacles_critic.cpp
   src/critics/cost_critic.cpp
   src/critics/goal_critic.cpp
   src/critics/goal_angle_critic.cpp
-  #src/critics/path_align_critic.cpp
   src/critics/path_align_legacy_critic.cpp
   src/critics/path_follow_critic.cpp
   src/critics/path_angle_critic.cpp
@@ -360,6 +320,7 @@ install(DIRECTORY include/${PROJECT_NAME}/
 
 install(FILES
   mppi_local_planner_plugin.xml
+  critic_plugin.xml
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
@@ -384,3 +345,4 @@ install(DIRECTORY
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
